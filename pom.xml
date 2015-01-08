@@ -81,14 +81,14 @@
               <goal>compile</goal>
             </goals>
           </execution>
-          <execution>
-            <!-- Run tests through gwt:test, this allows reusing the plugin configuration for GWTTestCases -->
+          <!-- <execution>
+             Run tests through gwt:test, this allows reusing the plugin configuration for GWTTestCases
             <id>gwt-tests</id>
             <phase>test</phase>
             <goals>
               <goal>test</goal>
             </goals>
-          </execution>
+          </execution> -->
         </executions>
         <!-- Plugin configuration. There are many available options, 
              see gwt-maven-plugin documentation at codehaus.org --> 
