@@ -104,6 +104,7 @@
           <mode>htmlunit</mode>
           <!-- Tests patterns -->
           <includes>**/Test*.java,**/*Test.java,**/*TestCase.java</includes>
+          <copyWebapp>true</copyWebapp>
         </configuration>
       </plugin>
 
