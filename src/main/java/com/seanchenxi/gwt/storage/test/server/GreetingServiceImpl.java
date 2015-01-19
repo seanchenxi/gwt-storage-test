@@ -23,6 +23,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
     StorageUtils.loadSerializationPolicy(config.getServletContext(), "test");
   }
 
+  @Override
   public String greetServer(String input) throws IllegalArgumentException {
     // Verify that the input is valid. 
     if (!FieldVerifier.isValidName(input)) {
