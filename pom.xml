@@ -67,7 +67,7 @@
   </dependencies>
   
   <build>
-    
+
     <plugins>
       
       <!-- GWT Maven Plugin-->

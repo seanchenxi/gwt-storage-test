@@ -3,6 +3,7 @@ package com.seanchenxi.gwt.storage.test.client;
 import com.google.gwt.user.client.rpc.SerializationException;
 import com.seanchenxi.gwt.storage.client.StorageKey;
 import com.seanchenxi.gwt.storage.client.serializer.StorageSerializer;
+import com.seanchenxi.gwt.storage.shared.StorageUtils;
 import com.seanchenxi.gwt.storage.test.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -38,19 +39,10 @@ public class Test implements EntryPoint {
    */
   private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
-  private final TestKeyProvider testKeyProvider = GWT.create(TestKeyProvider.class);
-  private final StorageSerializer storageSerializer = GWT.create(StorageSerializer.class);
-
   /**
    * This is the entry point method.
    */
   public void onModuleLoad() {
-    try {
-      storageSerializer.serialize(Object.class, new TestValue());
-    } catch (SerializationException e) {
-      e.printStackTrace();
-    }
-
     final Button sendButton = new Button("Send");
     final TextBox nameField = new TextBox();
     nameField.setText("GWT User");
@@ -145,7 +137,7 @@ public class Test implements EntryPoint {
             dialogBox.setText("Remote Procedure Call");
             serverResponseLabel.removeStyleName("serverResponseLabelError");
             try {
-              TestValue testValue = storageSerializer.deserialize(TestValue.class, result);
+              TestValue testValue = StorageUtils.deserialize(TestValue.class, result);
               serverResponseLabel.setHTML(result + "<br/><hr><br/>" + String.valueOf(testValue) + "<br/><hr><br/>" + testValue.getName());
             } catch (SerializationException e) {
               e.printStackTrace();
