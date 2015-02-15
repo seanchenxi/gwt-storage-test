@@ -20,7 +20,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
   @Override
   public void init(ServletConfig config) throws ServletException {
     super.init(config);
-    StorageUtils.loadSerializationPolicy(config.getServletContext(), "test");
+    StorageUtils.PolicyLoader.load(config.getServletContext(), "test");
   }
 
   public String greetServer(String input) throws IllegalArgumentException {
