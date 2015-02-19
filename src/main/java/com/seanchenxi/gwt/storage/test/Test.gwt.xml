@@ -19,7 +19,6 @@
 
   <inherits name="com.seanchenxi.gwt.storage.Storage" />
   <set-configuration-property name="storage.type.finder" value="rpc" />
-  <set-configuration-property name="storage.blacklist" value=".*shared\.IgnoredValue" />
   <!-- Other module inherits                                      -->
 
   <!-- Specify the app entry point class.                         -->

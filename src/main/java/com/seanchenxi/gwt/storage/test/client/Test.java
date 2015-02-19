@@ -1,9 +1,10 @@
 package com.seanchenxi.gwt.storage.test.client;
 
 import com.google.gwt.user.client.rpc.SerializationException;
+
+import com.seanchenxi.gwt.storage.client.StorageExt;
 import com.seanchenxi.gwt.storage.client.StorageKey;
 import com.seanchenxi.gwt.storage.client.serializer.StorageSerializer;
-import com.seanchenxi.gwt.storage.shared.StorageUtils;
 import com.seanchenxi.gwt.storage.test.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -38,6 +39,8 @@ public class Test implements EntryPoint {
    * Create a remote service proxy to talk to the server-side Greeting service.
    */
   private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+  private final TestKeyProvider testKeyProvider = GWT.create(TestKeyProvider.class);
 
   /**
    * This is the entry point method.
@@ -123,7 +126,7 @@ public class Test implements EntryPoint {
         sendButton.setEnabled(false);
         textToServerLabel.setText(textToServer);
         serverResponseLabel.setText("");
-        greetingService.greetServer(textToServer, new AsyncCallback<String>() {
+        greetingService.greetServer(textToServer, new AsyncCallback<TestValue>() {
           public void onFailure(Throwable caught) {
             // Show the RPC error message to the user
             dialogBox.setText("Remote Procedure Call - Failure");
@@ -133,12 +136,11 @@ public class Test implements EntryPoint {
             closeButton.setFocus(true);
           }
 
-          public void onSuccess(String result) {
+          public void onSuccess(TestValue result) {
             dialogBox.setText("Remote Procedure Call");
             serverResponseLabel.removeStyleName("serverResponseLabelError");
             try {
-              TestValue testValue = StorageUtils.deserialize(TestValue.class, result);
-              serverResponseLabel.setHTML(result + "<br/><hr><br/>" + String.valueOf(testValue) + "<br/><hr><br/>" + testValue.getName());
+              StorageExt.getLocalStorage().put(testKeyProvider.fvKey(), result);
             } catch (SerializationException e) {
               e.printStackTrace();
             }

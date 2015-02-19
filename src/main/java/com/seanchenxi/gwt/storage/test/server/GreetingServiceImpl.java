@@ -1,13 +1,11 @@
 package com.seanchenxi.gwt.storage.test.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.seanchenxi.gwt.storage.shared.StorageUtils;
+
 import com.seanchenxi.gwt.storage.test.client.GreetingService;
 import com.seanchenxi.gwt.storage.test.shared.FieldVerifier;
 import com.seanchenxi.gwt.storage.test.shared.TestValue;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import java.util.Random;
 
 /**
@@ -17,13 +15,7 @@ import java.util.Random;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
     GreetingService {
 
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-    super.init(config);
-    StorageUtils.PolicyLoader.load(config.getServletContext(), "test");
-  }
-
-  public String greetServer(String input) throws IllegalArgumentException {
+  public TestValue greetServer(String input) throws IllegalArgumentException {
     // Verify that the input is valid. 
     if (!FieldVerifier.isValidName(input)) {
       // If the input is not valid, throw an IllegalArgumentException back to
@@ -43,12 +35,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
     value.setAge(new Random().nextInt());
     value.setName("Hello, " + input + "!<br><br>I am running " + serverInfo
             + ".<br><br>It looks like you are using:<br>" + userAgent);
-    try {
-      return StorageUtils.serialize(value);
-    } catch (Exception e) {
-      e.printStackTrace();
-      return "error";
-    }
+    return value;
   }
 
   @Override

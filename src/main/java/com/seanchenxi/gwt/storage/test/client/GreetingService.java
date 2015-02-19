@@ -9,6 +9,6 @@ import com.seanchenxi.gwt.storage.test.shared.TestValue;
  */
 @RemoteServiceRelativePath("greet")
 public interface GreetingService extends RemoteService {
-  String greetServer(String name) throws IllegalArgumentException;
+  TestValue greetServer(String name) throws IllegalArgumentException;
   TestValue testValue();
 }

@@ -2,6 +2,8 @@ package com.seanchenxi.gwt.storage.test.client;
 
 import com.seanchenxi.gwt.storage.client.serializer.StorageSerializer;
 import com.seanchenxi.gwt.storage.test.shared.FieldVerifier;
+import com.seanchenxi.gwt.storage.test.shared.TestValue;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -48,15 +50,15 @@ public class TestTest extends GWTTestCase {
     delayTestFinish(10000);
 
     // Send a request to the server.
-    greetingService.greetServer("GWT User", new AsyncCallback<String>() {
+    greetingService.greetServer("GWT User", new AsyncCallback<TestValue>() {
       public void onFailure(Throwable caught) {
         // The request resulted in an unexpected error.
         fail("Request failure: " + caught.getMessage());
       }
 
-      public void onSuccess(String result) {
+      public void onSuccess(TestValue result) {
         // Verify that the response is correct.
-        assertTrue(result.startsWith("Hello, GWT User!"));
+        assertTrue(result != null);
 
         // Now that we have received a response, we need to tell the test runner
         // that the test is complete. You must call finishTest() after an
